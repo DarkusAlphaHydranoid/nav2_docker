@@ -18,7 +18,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ros_distro: [humble, iron, jazzy, rolling] 
+        ros_distro: [humble, jazzy, rolling] 
 
     steps:
       - name: Set up QEMU
