@@ -11,11 +11,14 @@ WORKDIR /root/nav2_ws
 RUN mkdir -p ~/nav2_ws/src
 ARG VERSION_TAG=latest
 RUN if [ "${ROS_DISTRO}" = "rolling" ]; then \
-      git clone https://github.com/ros-planning/navigation2.git --branch main ./src/navigation2; \
+      git clone https://github.com/ros-planning/navigation2.git --branch main ./src/navigation2 && \
+      vcs import ./src/ < ./src/navigation2/tools/underlay.repos; \
     elif [ "${VERSION_TAG}" = "latest" ]; then \
-      git clone https://github.com/ros-planning/navigation2.git --branch ${ROS_DISTRO} ./src/navigation2; \
+      git clone https://github.com/ros-planning/navigation2.git --branch ${ROS_DISTRO} ./src/navigation2 && \
+      vcs import ./src/ < ./src/navigation2/tools/underlay.repos; \
     else \
-      git clone https://github.com/ros-planning/navigation2.git --branch ${VERSION_TAG} ./src/navigation2; \
+      git clone https://github.com/ros-planning/navigation2.git --branch ${VERSION_TAG} ./src/navigation2 && \
+      vcs import ./src/ < ./src/navigation2/tools/underlay.repos; \
     fi
 
 RUN rm /etc/ros/rosdep/sources.list.d/20-default.list && rosdep init
