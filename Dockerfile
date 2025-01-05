@@ -14,11 +14,9 @@ RUN if [ "${ROS_DISTRO}" = "rolling" ]; then \
       git clone https://github.com/ros-planning/navigation2.git --branch main ./src/navigation2 && \
       vcs import ./src/ < ./src/navigation2/tools/underlay.repos; \
     elif [ "${VERSION_TAG}" = "latest" ]; then \
-      git clone https://github.com/ros-planning/navigation2.git --branch ${ROS_DISTRO} ./src/navigation2 && \
-      vcs import ./src/ < ./src/navigation2/tools/underlay.repos; \
+      git clone https://github.com/ros-planning/navigation2.git --branch ${ROS_DISTRO} ./src/navigation2; \
     else \
-      git clone https://github.com/ros-planning/navigation2.git --branch ${VERSION_TAG} ./src/navigation2 && \
-      vcs import ./src/ < ./src/navigation2/tools/underlay.repos; \
+      git clone https://github.com/ros-planning/navigation2.git --branch ${VERSION_TAG} ./src/navigation2; \
     fi
 
 RUN rm /etc/ros/rosdep/sources.list.d/20-default.list && rosdep init
