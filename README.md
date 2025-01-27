@@ -49,7 +49,7 @@ If you do NOT want to build Nav2 for distribution with the container (setup for 
 
 Occasionally, may need to update the base and rebuild when it diverges significantly.
 
-Additionaly, if you want to build with customized arguments, you can add your build arguments as in the example `--build-arg COLCON_BUILD_ARGS="--symlink-install"`.
+Additionally, if you want to build with customized arguments, you can add your build arguments as in the example `--build-arg COLCON_BUILD_ARGS="--symlink-install"`.
 
 ```
 sudo docker pull osrf/ros:${ROS_DISTRO}-desktop-full
