@@ -1,5 +1,6 @@
 ARG ROS_DISTRO=rolling
-FROM osrf/ros:${ROS_DISTRO}-desktop-full
+ARG BASE_IMAGE=osrf/ros:${ROS_DISTRO}-desktop-full
+FROM $BASE_IMAGE
 
 RUN apt update \
     && DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends --no-install-suggests \
@@ -11,7 +12,8 @@ WORKDIR /root/nav2_ws
 RUN mkdir -p ~/nav2_ws/src
 ARG VERSION_TAG=latest
 RUN if [ "${ROS_DISTRO}" = "rolling" ]; then \
-      git clone https://github.com/ros-planning/navigation2.git --branch main ./src/navigation2; \
+      git clone https://github.com/ros-planning/navigation2.git --branch main ./src/navigation2 && \
+      vcs import ./src/ < ./src/navigation2/tools/underlay.repos; \
     elif [ "${VERSION_TAG}" = "latest" ]; then \
       git clone https://github.com/ros-planning/navigation2.git --branch ${ROS_DISTRO} ./src/navigation2; \
     else \
