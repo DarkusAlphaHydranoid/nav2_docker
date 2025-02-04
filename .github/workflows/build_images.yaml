@@ -40,7 +40,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           build-args: |
             ROS_DISTRO=${{ matrix.ros_distro }}
-            BASE_IMAGE=${{ matrix.ros_distro == 'rolling' && 'osrf/ros2:nightly' || format('osrf/ros-{0}-desktop-full', matrix.version.ros_distro) }}
+            BASE_IMAGE=${{ matrix.ros_distro == 'rolling' && 'osrf/ros2:nightly' || format('osrf/ros-{0}-desktop-full', matrix.ros_distro) }}
             BUILD=true
 
   release_docker:
